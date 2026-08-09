@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrado — коллекция премиальной плиты большого формата</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #16130E;
+    --bg-panel: #1E1A14;
+    --bg-panel-2: #262019;
+    --ivory: #F1EAE0;
+    --ivory-dim: #C9C0B2;
+    --muted: #8C8272;
+    --brass: #B99358;
+    --brass-light: #DCC08A;
+    --line: rgba(241,234,224,0.12);
+    --line-strong: rgba(241,234,224,0.22);
+    --radius: 2px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ivory);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:0.01em;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:1320px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 40px;
+    background:rgba(22,19,14,0.7);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(241,234,224,0.08);
+  }
+  .nav-logo{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    letter-spacing:0.28em;
+    font-weight:500;
+    color:var(--ivory);
+    text-transform:uppercase;
+  }
+  .nav-links{
+    display:flex;
+    gap:32px;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ivory);
+  }
+  .nav-links a{text-decoration:none;opacity:0.85;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  @media (max-width:720px){
+    .nav-links{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:140px 24px 0;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(185,147,88,0.10), transparent 55%),
+      linear-gradient(180deg, #100E0A 0%, #17130E 60%, #16130E 100%);
+  }
+  .hero-eyebrow{
+    font-size:12px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    margin-bottom:28px;
+  }
+  .hero h1{
+    font-size:clamp(56px, 11vw, 152px);
+    line-height:0.92;
+    letter-spacing:0.01em;
+    color:var(--ivory);
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:300;
+    color:var(--brass);
+  }
+  .hero-sub{
+    max-width:560px;
+    margin:32px auto 0;
+    font-size:17px;
+    line-height:1.6;
+    color:var(--ivory-dim);
+    font-weight:400;
+  }
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    margin-top:44px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border-radius:var(--radius);
+    cursor:pointer;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    transition:border-color .25s, background .25s, color .25s;
+  }
+  .btn-primary{
+    background:var(--brass);
+    border-color:var(--brass);
+    color:#17130E;
+    font-weight:600;
+  }
+  .btn-primary:hover{background:var(--brass-light);border-color:var(--brass-light);}
+  .btn-ghost:hover{border-color:var(--brass);color:var(--brass-light);}
+
+  .hero-scroll{
+    margin-top:64px;
+    margin-bottom:36px;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--muted);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+  }
+  .hero-scroll::after{
+    content:"";
+    width:1px;
+    height:40px;
+    background:linear-gradient(var(--brass), transparent);
+    animation:scrollpulse 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollpulse{
+    0%,100%{opacity:0.25;}
+    50%{opacity:1;}
+  }
+
+  /* ---------- CORE SAMPLE STRIP (signature element) ---------- */
+  .core-wrap{
+    position:relative;
+    width:100%;
+  }
+  .core-label{
+    position:absolute;
+    top:-13px;
+    left:40px;
+    z-index:5;
+    background:var(--bg);
+    padding:0 12px;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .core-strip{
+    display:flex;
+    width:100%;
+    height:180px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .core-slice{
+    flex:1 1 0;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    cursor:pointer;
+    filter:grayscale(45%) brightness(0.72);
+    transition:flex .45s cubic-bezier(.22,.9,.36,1), filter .45s ease;
+    position:relative;
+  }
+  .core-slice:hover{
+    flex:6 1 0;
+    filter:grayscale(0%) brightness(1);
+  }
+  @media (max-width:720px){
+    .core-strip{height:120px;}
+    .core-slice:hover{flex:3 1 0;}
+  }
+
+  /* ---------- INTRO STRIP ---------- */
+  .intro{
+    padding:120px 0 80px;
+    border-bottom:1px solid var(--line);
+  }
+  .intro-grid{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:80px;
+    align-items:end;
+  }
+  .intro h2{
+    font-size:clamp(30px,4vw,44px);
+    line-height:1.15;
+    font-weight:400;
+  }
+  .intro-copy{
+    color:var(--ivory-dim);
+    font-size:15px;
+    line-height:1.75;
+  }
+  .intro-stats{
+    display:flex;
+    gap:48px;
+    margin-top:36px;
+  }
+  .intro-stat b{
+    font-family:'Fraunces',serif;
+    font-size:34px;
+    font-weight:500;
+    color:var(--brass-light);
+    display:block;
+  }
+  .intro-stat span{
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  @media (max-width:860px){
+    .intro-grid{grid-template-columns:1fr;gap:32px;}
+  }
+
+  /* ---------- CATALOG ---------- */
+  .catalog{
+    padding:80px 0 40px;
+  }
+  .catalog-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:44px;
+  }
+  .catalog-head h2{
+    font-size:clamp(28px,3.6vw,40px);
+    font-weight:400;
+  }
+  .catalog-count{
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.05em;
+  }
+
+  .filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:56px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:20px 0;
+  }
+  .filter-chip{
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.06em;
+    padding:9px 18px;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    color:var(--ivory-dim);
+    border-radius:999px;
+    cursor:pointer;
+    transition:all .2s ease;
+  }
+  .filter-chip:hover{color:var(--ivory);border-color:var(--brass);}
+  .filter-chip.active{
+    background:var(--brass);
+    border-color:var(--brass);
+    color:#17130E;
+    font-weight:600;
+  }
+
+  .tile-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  @media (max-width:1080px){
+    .tile-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  @media (max-width:620px){
+    .tile-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+  }
+
+  .tile-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    overflow:hidden;
+    transition:border-color .25s, transform .25s;
+  }
+  .tile-card:hover{border-color:var(--line-strong);}
+  .tile-card.hidden{display:none;}
+
+  .tile-media{
+    position:relative;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    background:#0d0b08;
+  }
+  .tile-media img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .6s cubic-bezier(.22,.9,.36,1);
+  }
+  .tile-card:hover .tile-media img{transform:scale(1.06);}
+  .tile-media-fade{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(13,11,8,0.38) 0%, transparent 22%),
+      linear-gradient(180deg, transparent 55%, rgba(15,13,10,0.55) 100%);
+    pointer-events:none;
+  }
+
+  .tile-info{padding:22px 24px 24px;}
+  .tile-eyebrow{
+    font-size:10px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    margin:0 0 8px;
+  }
+  .tile-name{
+    font-size:22px;
+    font-weight:500;
+    margin-bottom:4px;
+  }
+  .tile-cn{
+    font-size:13px;
+    color:var(--muted);
+    margin:0 0 16px;
+  }
+  .tile-specs{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    color:var(--muted);
+    padding-top:14px;
+    border-top:1px solid var(--line);
+    letter-spacing:0.02em;
+  }
+  .tile-code{font-family:'Inter',sans-serif;opacity:0.8;}
+
+  .tile-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:18px;
+  }
+  .tile-price{
+    font-size:13px;
+    color:var(--ivory-dim);
+    margin:0;
+  }
+  .tile-price strong{
+    color:var(--ivory);
+    font-family:'Fraunces',serif;
+    font-size:17px;
+    font-weight:500;
+  }
+  .tile-cta{
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:10px 18px;
+    background:transparent;
+    border:1px solid var(--line-strong);
+    color:var(--ivory);
+    cursor:pointer;
+    transition:all .2s ease;
+  }
+  .tile-cta:hover{background:var(--brass);border-color:var(--brass);color:#17130E;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    margin-top:120px;
+    padding:100px 0 90px;
+    background:var(--bg-panel);
+    border-top:1px solid var(--line);
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+  }
+  .contact h2{
+    font-size:clamp(30px,4vw,46px);
+    font-weight:400;
+    margin-bottom:20px;
+  }
+  .contact p{
+    color:var(--ivory-dim);
+    font-size:15px;
+    line-height:1.7;
+    max-width:420px;
+  }
+  .contact-details{
+    margin-top:36px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    font-size:14px;
+    color:var(--ivory-dim);
+  }
+  .contact-details b{color:var(--ivory);font-weight:500;}
+
+  .form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .form input, .form select{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--line-strong);
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    padding:12px 2px;
+    outline:none;
+    transition:border-color .2s;
+  }
+  .form input::placeholder{color:var(--muted);}
+  .form input:focus, .form select:focus{border-color:var(--brass);}
+  .form-note{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:-4px;
+  }
+  .form button{margin-top:10px;align-self:flex-start;}
+  @media (max-width:860px){
+    .contact-grid{grid-template-columns:1fr;gap:40px;}
+  }
+
+  footer{
+    padding:36px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--muted);
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  /* modal */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(10,9,7,0.72);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:100;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--bg-panel-2);
+    border:1px solid var(--line-strong);
+    max-width:420px;width:100%;
+    padding:36px;
+    position:relative;
+  }
+  .modal-close{
+    position:absolute;top:16px;right:16px;
+    background:none;border:none;color:var(--muted);
+    font-size:20px;cursor:pointer;line-height:1;
+  }
+  .modal h3{font-size:24px;margin-bottom:6px;}
+  .modal .modal-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Carrado</div>
+  <div class="nav-links">
+    <a href="#catalog">Коллекция</a>
+    <a href="#contact">Контакты</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Шоурум премиальной плиты</p>
+  <h1>CARRADO<br><em>stone&nbsp;atelier</em></h1>
+  <p class="hero-sub">37 фактур крупноформатного керамогранита под натуральный камень — 1600×3200 мм. Мрамор, оникс, гранит и агат в одной коллекции для интерьеров, где важна каждая деталь.</p>
+  <div class="hero-actions">
+    <a href="#catalog" class="btn btn-primary">Смотреть коллекцию</a>
+    <a href="#contact" class="btn btn-ghost">Записаться на показ</a>
+  </div>
+  <div class="hero-scroll">Керн коллекции</div>
+</section>
+
+<div class="core-wrap">
+  <span class="core-label">37 фактур — наведите курсор</span>
+  <div class="core-strip" id="core-strip">
+<div class="core-slice" style="background-image:url(images/ruby-red.jpg)" data-target="tile-ruby-red" title="Ruby Red"></div>
+<div class="core-slice" style="background-image:url(images/new-pandora.jpg)" data-target="tile-new-pandora" title="New Pandora"></div>
+<div class="core-slice" style="background-image:url(images/rosso-fiamma.jpg)" data-target="tile-rosso-fiamma" title="Rosso di Fiamma"></div>
+<div class="core-slice" style="background-image:url(images/galaxy-blue.jpg)" data-target="tile-galaxy-blue" title="Galaxy Blue"></div>
+<div class="core-slice" style="background-image:url(images/blue-jadeite.jpg)" data-target="tile-blue-jadeite" title="Blue Jadeite"></div>
+<div class="core-slice" style="background-image:url(images/monets-garden.jpg)" data-target="tile-monets-garden" title="Monet's Garden"></div>
+<div class="core-slice" style="background-image:url(images/fontainebleau-green.jpg)" data-target="tile-fontainebleau-green" title="Fontainebleau Amazon Green"></div>
+<div class="core-slice" style="background-image:url(images/onice-rose.jpg)" data-target="tile-onice-rose" title="Onice Rose"></div>
+<div class="core-slice" style="background-image:url(images/white-sand.jpg)" data-target="tile-white-sand" title="White Sand"></div>
+<div class="core-slice" style="background-image:url(images/tal-mahal.jpg)" data-target="tile-tal-mahal" title="Tal Mahal"></div>
+<div class="core-slice" style="background-image:url(images/peach-plum-breeze.jpg)" data-target="tile-peach-plum-breeze" title="Peach & Plum Spring Breeze"></div>
+<div class="core-slice" style="background-image:url(images/dream-cloud-pink.jpg)" data-target="tile-dream-cloud-pink" title="Dream Cloud Pink"></div>
+<div class="core-slice" style="background-image:url(images/pandora-pink.jpg)" data-target="tile-pandora-pink" title="Pandora Pink"></div>
+<div class="core-slice" style="background-image:url(images/pink-roman-jade.jpg)" data-target="tile-pink-roman-jade" title="Pink Roman Jade"></div>
+<div class="core-slice" style="background-image:url(images/andes-snowscape.jpg)" data-target="tile-andes-snowscape" title="Andes Snowscape"></div>
+<div class="core-slice" style="background-image:url(images/ice-jade.jpg)" data-target="tile-ice-jade" title="Ice Jade"></div>
+<div class="core-slice" style="background-image:url(images/onice-rose-white.jpg)" data-target="tile-onice-rose-white" title="Onice Rose White"></div>
+<div class="core-slice" style="background-image:url(images/persian-topaz.jpg)" data-target="tile-persian-topaz" title="Persian Topaz"></div>
+<div class="core-slice" style="background-image:url(images/volcano-agate-red.jpg)" data-target="tile-volcano-agate-red" title="Volcano Agate Jade Red"></div>
+<div class="core-slice" style="background-image:url(images/petrified-wood.jpg)" data-target="tile-petrified-wood" title="Petrified Wood"></div>
+<div class="core-slice" style="background-image:url(images/golden-pandora.jpg)" data-target="tile-golden-pandora" title="Golden Pandora"></div>
+<div class="core-slice" style="background-image:url(images/dubai-gold.jpg)" data-target="tile-dubai-gold" title="Dubai Gold"></div>
+<div class="core-slice" style="background-image:url(images/butterfly-green.jpg)" data-target="tile-butterfly-green" title="Butterfly Green"></div>
+<div class="core-slice" style="background-image:url(images/frosted-jade.jpg)" data-target="tile-frosted-jade" title="Frosted Jade"></div>
+<div class="core-slice" style="background-image:url(images/bulgari-grey.jpg)" data-target="tile-bulgari-grey" title="Bulgari Grey"></div>
+<div class="core-slice" style="background-image:url(images/rhine-dawn.jpg)" data-target="tile-rhine-dawn" title="Rhine Dawn"></div>
+<div class="core-slice" style="background-image:url(images/bvlgari-blue.jpg)" data-target="tile-bvlgari-blue" title="Bvlgari Blue"></div>
+<div class="core-slice" style="background-image:url(images/van-gogh-green.jpg)" data-target="tile-van-gogh-green" title="Van Gogh Green"></div>
+<div class="core-slice" style="background-image:url(images/brescia.jpg)" data-target="tile-brescia" title="Brescia"></div>
+<div class="core-slice" style="background-image:url(images/sintered-enigma-green.jpg)" data-target="tile-sintered-enigma-green" title="Sintered Enigma Green"></div>
+<div class="core-slice" style="background-image:url(images/patek-emerald.jpg)" data-target="tile-patek-emerald" title="Patek Emerald"></div>
+<div class="core-slice" style="background-image:url(images/victoria-green.jpg)" data-target="tile-victoria-green" title="Victoria Green"></div>
+<div class="core-slice" style="background-image:url(images/top-amazon-green.jpg)" data-target="tile-top-amazon-green" title="Top Amazon Green"></div>
+<div class="core-slice" style="background-image:url(images/fendi-white.jpg)" data-target="tile-fendi-white" title="Fendi White"></div>
+<div class="core-slice" style="background-image:url(images/baikal-red-jade.jpg)" data-target="tile-baikal-red-jade" title="Baikal Red Jade"></div>
+<div class="core-slice" style="background-image:url(images/calacatta-gold.jpg)" data-target="tile-calacatta-gold" title="Calacatta Gold"></div>
+<div class="core-slice" style="background-image:url(images/pink-sand.jpg)" data-target="tile-pink-sand" title="Pink Sand"></div>
+  </div>
+</div>
+
+<section class="intro">
+  <div class="wrap intro-grid">
+    <h2>Каждая плита — цельный срез камня, а не повторяющийся узор.</h2>
+    <div>
+      <p class="intro-copy">Carrado печатает крупный формат 1600×3200 мм с эффектом зеркального книжного среза — рисунок плавно продолжается от плиты к плите, как в природном камне. Подходит для полов, стен, столешниц и облицовки фасадов мебели.</p>
+      <div class="intro-stats">
+        <div class="intro-stat"><b>37</b><span>Фактур в коллекции</span></div>
+        <div class="intro-stat"><b>12 мм</b><span>Толщина плиты</span></div>
+        <div class="intro-stat"><b>5.12 м²</b><span>Площадь одной плиты</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="catalog" id="catalog">
+  <div class="wrap">
+    <div class="catalog-head">
+      <h2>Коллекция плит</h2>
+      <span class="catalog-count" id="catalog-count">37 фактур</span>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter-chip active" data-filter="all">Все фактуры</button>
+      <button class="filter-chip" data-filter="white">Белый</button>
+      <button class="filter-chip" data-filter="beige">Бежевый</button>
+      <button class="filter-chip" data-filter="grey">Серый</button>
+      <button class="filter-chip" data-filter="green">Зелёный</button>
+      <button class="filter-chip" data-filter="blue">Синий</button>
+      <button class="filter-chip" data-filter="pink">Розовый</button>
+      <button class="filter-chip" data-filter="bronze">Коричневый и золотой</button>
+    </div>
+
+    <div class="tile-grid" id="tile-grid">
+        <article class="tile-card" data-category="bronze" id="tile-ruby-red">
+          <div class="tile-media">
+            <img src="images/ruby-red.jpg" alt="Ruby Red" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Коричневый и золотой</p>
+            <h3 class="tile-name">Ruby Red</h3>
+            <p class="tile-cn">红宝石</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-025D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Ruby Red">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="beige" id="tile-new-pandora">
+          <div class="tile-media">
+            <img src="images/new-pandora.jpg" alt="New Pandora" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Бежевый</p>
+            <h3 class="tile-name">New Pandora</h3>
+            <p class="tile-cn">新潘多拉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-029D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="New Pandora">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="bronze" id="tile-rosso-fiamma">
+          <div class="tile-media">
+            <img src="images/rosso-fiamma.jpg" alt="Rosso di Fiamma" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Коричневый и золотой</p>
+            <h3 class="tile-name">Rosso di Fiamma</h3>
+            <p class="tile-cn">古驰红</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-033D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Rosso di Fiamma">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="blue" id="tile-galaxy-blue">
+          <div class="tile-media">
+            <img src="images/galaxy-blue.jpg" alt="Galaxy Blue" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Синий</p>
+            <h3 class="tile-name">Galaxy Blue</h3>
+            <p class="tile-cn">银河蓝</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-037D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Galaxy Blue">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="blue" id="tile-blue-jadeite">
+          <div class="tile-media">
+            <img src="images/blue-jadeite.jpg" alt="Blue Jadeite" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Синий</p>
+            <h3 class="tile-name">Blue Jadeite</h3>
+            <p class="tile-cn">蓝翡翠</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-041D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Blue Jadeite">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-monets-garden">
+          <div class="tile-media">
+            <img src="images/monets-garden.jpg" alt="Monet's Garden" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Monet's Garden</h3>
+            <p class="tile-cn">莫奈花园</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-042D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Monet's Garden">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-fontainebleau-green">
+          <div class="tile-media">
+            <img src="images/fontainebleau-green.jpg" alt="Fontainebleau Amazon Green" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Fontainebleau Amazon Green</h3>
+            <p class="tile-cn">枫丹亚马逊绿</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-028D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Fontainebleau Amazon Green">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="pink" id="tile-onice-rose">
+          <div class="tile-media">
+            <img src="images/onice-rose.jpg" alt="Onice Rose" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Розовый</p>
+            <h3 class="tile-name">Onice Rose</h3>
+            <p class="tile-cn">玫瑰冰玉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-032D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Onice Rose">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="white" id="tile-white-sand">
+          <div class="tile-media">
+            <img src="images/white-sand.jpg" alt="White Sand" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Белый</p>
+            <h3 class="tile-name">White Sand</h3>
+            <p class="tile-cn">白金沙</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-030D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="White Sand">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="white" id="tile-tal-mahal">
+          <div class="tile-media">
+            <img src="images/tal-mahal.jpg" alt="Tal Mahal" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Белый</p>
+            <h3 class="tile-name">Tal Mahal</h3>
+            <p class="tile-cn">镜湖春晓</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-031D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Tal Mahal">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="pink" id="tile-peach-plum-breeze">
+          <div class="tile-media">
+            <img src="images/peach-plum-breeze.jpg" alt="Peach & Plum Spring Breeze" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Розовый</p>
+            <h3 class="tile-name">Peach & Plum Spring Breeze</h3>
+            <p class="tile-cn">桃李春风</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-026D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Peach & Plum Spring Breeze">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="pink" id="tile-dream-cloud-pink">
+          <div class="tile-media">
+            <img src="images/dream-cloud-pink.jpg" alt="Dream Cloud Pink" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Розовый</p>
+            <h3 class="tile-name">Dream Cloud Pink</h3>
+            <p class="tile-cn">云梦粉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-027D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Dream Cloud Pink">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="pink" id="tile-pandora-pink">
+          <div class="tile-media">
+            <img src="images/pandora-pink.jpg" alt="Pandora Pink" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Розовый</p>
+            <h3 class="tile-name">Pandora Pink</h3>
+            <p class="tile-cn">潘多拉粉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-022D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Pandora Pink">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="bronze" id="tile-pink-roman-jade">
+          <div class="tile-media">
+            <img src="images/pink-roman-jade.jpg" alt="Pink Roman Jade" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Коричневый и золотой</p>
+            <h3 class="tile-name">Pink Roman Jade</h3>
+            <p class="tile-cn">罗马粉玉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-040D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Pink Roman Jade">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="grey" id="tile-andes-snowscape">
+          <div class="tile-media">
+            <img src="images/andes-snowscape.jpg" alt="Andes Snowscape" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Серый</p>
+            <h3 class="tile-name">Andes Snowscape</h3>
+            <p class="tile-cn">安第斯雪景</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-046D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Andes Snowscape">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="white" id="tile-ice-jade">
+          <div class="tile-media">
+            <img src="images/ice-jade.jpg" alt="Ice Jade" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Белый</p>
+            <h3 class="tile-name">Ice Jade</h3>
+            <p class="tile-cn">冰玉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-048D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Ice Jade">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="white" id="tile-onice-rose-white">
+          <div class="tile-media">
+            <img src="images/onice-rose-white.jpg" alt="Onice Rose White" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Белый</p>
+            <h3 class="tile-name">Onice Rose White</h3>
+            <p class="tile-cn">玫瑰白冰玉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-039D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Onice Rose White">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="beige" id="tile-persian-topaz">
+          <div class="tile-media">
+            <img src="images/persian-topaz.jpg" alt="Persian Topaz" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Бежевый</p>
+            <h3 class="tile-name">Persian Topaz</h3>
+            <p class="tile-cn">波斯黄玉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-038D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Persian Topaz">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="bronze" id="tile-volcano-agate-red">
+          <div class="tile-media">
+            <img src="images/volcano-agate-red.jpg" alt="Volcano Agate Jade Red" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Коричневый и золотой</p>
+            <h3 class="tile-name">Volcano Agate Jade Red</h3>
+            <p class="tile-cn">红火山玛瑙玉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-035D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Volcano Agate Jade Red">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="white" id="tile-petrified-wood">
+          <div class="tile-media">
+            <img src="images/petrified-wood.jpg" alt="Petrified Wood" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Белый</p>
+            <h3 class="tile-name">Petrified Wood</h3>
+            <p class="tile-cn">木化石</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-036D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Petrified Wood">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="bronze" id="tile-golden-pandora">
+          <div class="tile-media">
+            <img src="images/golden-pandora.jpg" alt="Golden Pandora" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Коричневый и золотой</p>
+            <h3 class="tile-name">Golden Pandora</h3>
+            <p class="tile-cn">金花潘多拉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-007D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Golden Pandora">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="bronze" id="tile-dubai-gold">
+          <div class="tile-media">
+            <img src="images/dubai-gold.jpg" alt="Dubai Gold" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Коричневый и золотой</p>
+            <h3 class="tile-name">Dubai Gold</h3>
+            <p class="tile-cn">迪拜金</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-016D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Dubai Gold">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-butterfly-green">
+          <div class="tile-media">
+            <img src="images/butterfly-green.jpg" alt="Butterfly Green" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Butterfly Green</h3>
+            <p class="tile-cn">绿蝴蝶</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-001D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Butterfly Green">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-frosted-jade">
+          <div class="tile-media">
+            <img src="images/frosted-jade.jpg" alt="Frosted Jade" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Frosted Jade</h3>
+            <p class="tile-cn">冷翡翠</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-002D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Frosted Jade">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="grey" id="tile-bulgari-grey">
+          <div class="tile-media">
+            <img src="images/bulgari-grey.jpg" alt="Bulgari Grey" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Серый</p>
+            <h3 class="tile-name">Bulgari Grey</h3>
+            <p class="tile-cn">宝格丽灰</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-005D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Bulgari Grey">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="grey" id="tile-rhine-dawn">
+          <div class="tile-media">
+            <img src="images/rhine-dawn.jpg" alt="Rhine Dawn" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Серый</p>
+            <h3 class="tile-name">Rhine Dawn</h3>
+            <p class="tile-cn">莱茵河</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-006D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Rhine Dawn">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="grey" id="tile-bvlgari-blue">
+          <div class="tile-media">
+            <img src="images/bvlgari-blue.jpg" alt="Bvlgari Blue" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Серый</p>
+            <h3 class="tile-name">Bvlgari Blue</h3>
+            <p class="tile-cn">宝格丽蓝</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-003D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Bvlgari Blue">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-van-gogh-green">
+          <div class="tile-media">
+            <img src="images/van-gogh-green.jpg" alt="Van Gogh Green" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Van Gogh Green</h3>
+            <p class="tile-cn">梵高绿</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-013D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Van Gogh Green">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="beige" id="tile-brescia">
+          <div class="tile-media">
+            <img src="images/brescia.jpg" alt="Brescia" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Бежевый</p>
+            <h3 class="tile-name">Brescia</h3>
+            <p class="tile-cn">布雷西亚</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-009D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Brescia">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-sintered-enigma-green">
+          <div class="tile-media">
+            <img src="images/sintered-enigma-green.jpg" alt="Sintered Enigma Green" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Sintered Enigma Green</h3>
+            <p class="tile-cn">纳秋绿</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-012D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Sintered Enigma Green">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-patek-emerald">
+          <div class="tile-media">
+            <img src="images/patek-emerald.jpg" alt="Patek Emerald" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Patek Emerald</h3>
+            <p class="tile-cn">百达翡翠</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-017D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Patek Emerald">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-victoria-green">
+          <div class="tile-media">
+            <img src="images/victoria-green.jpg" alt="Victoria Green" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Victoria Green</h3>
+            <p class="tile-cn">维多利亚绿</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-020D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Victoria Green">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="green" id="tile-top-amazon-green">
+          <div class="tile-media">
+            <img src="images/top-amazon-green.jpg" alt="Top Amazon Green" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Зелёный</p>
+            <h3 class="tile-name">Top Amazon Green</h3>
+            <p class="tile-cn">顶级亚马逊绿</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-021D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Top Amazon Green">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="white" id="tile-fendi-white">
+          <div class="tile-media">
+            <img src="images/fendi-white.jpg" alt="Fendi White" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Белый</p>
+            <h3 class="tile-name">Fendi White</h3>
+            <p class="tile-cn">芬迪白</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-018D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Fendi White">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="bronze" id="tile-baikal-red-jade">
+          <div class="tile-media">
+            <img src="images/baikal-red-jade.jpg" alt="Baikal Red Jade" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Коричневый и золотой</p>
+            <h3 class="tile-name">Baikal Red Jade</h3>
+            <p class="tile-cn">贝加尔红玉</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-019D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Baikal Red Jade">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="white" id="tile-calacatta-gold">
+          <div class="tile-media">
+            <img src="images/calacatta-gold.jpg" alt="Calacatta Gold" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Белый</p>
+            <h3 class="tile-name">Calacatta Gold</h3>
+            <p class="tile-cn">超级鱼肚金</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-008D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Calacatta Gold">Заявка</button>
+            </div>
+          </div>
+        </article>
+        <article class="tile-card" data-category="pink" id="tile-pink-sand">
+          <div class="tile-media">
+            <img src="images/pink-sand.jpg" alt="Pink Sand" loading="lazy">
+            <div class="tile-media-fade"></div>
+          </div>
+          <div class="tile-info">
+            <p class="tile-eyebrow">Розовый</p>
+            <h3 class="tile-name">Pink Sand</h3>
+            <p class="tile-cn">粉金沙</p>
+            <div class="tile-specs">
+              <span>1600×3200×12 мм</span>
+              <span class="tile-code">MXJ1632-12-010D</span>
+            </div>
+            <div class="tile-footer">
+              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <button class="tile-cta" data-tile="Pink Sand">Заявка</button>
+            </div>
+          </div>
+        </article>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Запишитесь на просмотр коллекции</h2>
+      <p>Приезжайте в шоурум, чтобы увидеть плиты вживую при разном освещении, или оставьте заявку — подберём фактуры под ваш проект и рассчитаем стоимость.</p>
+      <div class="contact-details">
+        <div><b>Телефон:</b> +7 (___) ___-__-__</div>
+        <div><b>WhatsApp / Telegram:</b> укажите ваш контакт</div>
+        <div><b>Шоурум:</b> адрес уточняется</div>
+      </div>
+    </div>
+    <form class="form" id="lead-form">
+      <input type="text" id="tile-field-display" placeholder="Интересующая фактура (необязательно)">
+      <input type="text" name="name" placeholder="Ваше имя" required>
+      <input type="tel" name="phone" placeholder="Телефон" required>
+      <p class="form-note">Нажимая «Отправить», вы соглашаетесь на обработку персональных данных.</p>
+      <button type="submit" class="btn btn-primary">Отправить заявку</button>
+    </form>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© Carrado — плитка премиального сегмента</span>
+  <span>1600 × 3200 × 12 мм</span>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">&times;</button>
+    <h3 id="modal-title">Заявка на образец</h3>
+    <p class="modal-sub" id="modal-sub">Оставьте телефон — пришлём цену и наличие.</p>
+    <form class="form" id="modal-form">
+      <input type="text" name="name" placeholder="Ваше имя" required>
+      <input type="tel" name="phone" placeholder="Телефон" required>
+      <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // ---- Filters ----
+  const chips = document.querySelectorAll('.filter-chip');
+  const cards = document.querySelectorAll('.tile-card');
+  const countEl = document.getElementById('catalog-count');
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const filter = chip.dataset.filter;
+      let visible = 0;
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !match);
+        if(match) visible++;
+      });
+      countEl.textContent = visible + (visible === 1 ? ' фактура' : ' фактур');
+    });
+  });
+
+  // ---- Core sample strip -> scroll to tile ----
+  document.querySelectorAll('.core-slice').forEach(slice => {
+    slice.addEventListener('click', () => {
+      const target = document.getElementById(slice.dataset.target);
+      if(target){
+        target.scrollIntoView({behavior:'smooth', block:'center'});
+        target.style.borderColor = 'var(--brass)';
+        setTimeout(()=>{ target.style.borderColor = ''; }, 1600);
+      }
+    });
+  });
+
+  // ---- Modal ----
+  const overlay = document.getElementById('modal-overlay');
+  const modalSub = document.getElementById('modal-sub');
+  const modalClose = document.getElementById('modal-close');
+
+  document.querySelectorAll('.tile-cta').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tileName = btn.dataset.tile;
+      modalSub.textContent = `Фактура «${tileName}». Оставьте телефон — пришлём цену и наличие.`;
+      overlay.classList.add('open');
+    });
+  });
+  modalClose.addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.classList.remove('open'); });
+
+  document.getElementById('modal-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    overlay.querySelector('.modal').innerHTML = '<p style="padding:20px 0;">Спасибо! Мы свяжемся с вами в ближайшее время.</p>';
+    setTimeout(()=>{ overlay.classList.remove('open'); }, 1800);
+  });
+
+  document.getElementById('lead-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const form = e.target;
+    form.innerHTML = '<p style="padding:20px 0;color:var(--ivory);">Спасибо! Заявка отправлена, мы свяжемся с вами.</p>';
+  });
+</script>
+
+</body>
+</html>
