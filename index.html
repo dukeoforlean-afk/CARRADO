@@ -366,6 +366,34 @@
       linear-gradient(180deg, transparent 55%, rgba(15,13,10,0.55) 100%);
     pointer-events:none;
   }
+  .tile-interior-badge{
+    position:absolute;
+    left:14px;
+    bottom:14px;
+    z-index:3;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:8px 14px;
+    background:rgba(22,19,14,0.72);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    border:1px solid rgba(241,234,224,0.35);
+    border-radius:999px;
+    color:var(--ivory);
+    font-family:'Inter',sans-serif;
+    font-size:11px;
+    letter-spacing:0.04em;
+    cursor:pointer;
+    transition:background .2s, border-color .2s, transform .2s;
+  }
+  .tile-interior-badge svg{flex-shrink:0;opacity:0.9;}
+  .tile-interior-badge:hover{
+    background:var(--brass);
+    border-color:var(--brass);
+    color:#17130E;
+    transform:translateY(-1px);
+  }
 
   .tile-info{padding:22px 24px 24px;}
   .tile-eyebrow{
@@ -578,6 +606,90 @@
   .modal h3{font-size:24px;margin-bottom:6px;}
   .modal .modal-sub{font-size:13px;color:var(--muted);margin-bottom:24px;}
 
+  /* interior lightbox */
+  .ilb-overlay{
+    position:fixed;inset:0;
+    background:rgba(8,7,5,0.9);
+    display:none;
+    align-items:center;justify-content:center;
+    z-index:110;
+    padding:24px;
+  }
+  .ilb-overlay.open{display:flex;}
+  .ilb{
+    position:relative;
+    max-width:1100px;
+    width:100%;
+    max-height:90vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .ilb-frame{
+    position:relative;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .ilb img{
+    max-width:100%;
+    max-height:78vh;
+    object-fit:contain;
+    border:1px solid var(--line-strong);
+  }
+  .ilb-caption{
+    margin-top:18px;
+    text-align:center;
+  }
+  .ilb-caption h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    font-size:20px;
+    color:var(--ivory);
+    margin-bottom:4px;
+  }
+  .ilb-caption p{
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  .ilb-close{
+    position:absolute;top:-6px;right:-6px;
+    background:var(--bg-panel-2);
+    border:1px solid var(--line-strong);
+    color:var(--ivory);
+    width:38px;height:38px;
+    border-radius:50%;
+    font-size:20px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    z-index:5;
+  }
+  .ilb-nav{
+    position:absolute;top:50%;
+    transform:translateY(-50%);
+    background:rgba(22,19,14,0.6);
+    border:1px solid var(--line-strong);
+    color:var(--ivory);
+    width:44px;height:44px;
+    border-radius:50%;
+    font-size:20px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    z-index:5;
+    transition:background .2s;
+  }
+  .ilb-nav:hover{background:var(--brass);color:#17130E;}
+  .ilb-prev{left:8px;}
+  .ilb-next{right:8px;}
+  .ilb-nav.hidden{display:none;}
+  @media (max-width:720px){
+    .ilb-nav{width:36px;height:36px;font-size:16px;}
+  }
+
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important; transition:none !important;}
   }
@@ -680,152 +792,162 @@
     </div>
 
     <div class="tile-grid" id="tile-grid">
-        <article class="tile-card" data-category="bronze" id="tile-ruby-red">
+        <article class="tile-card" data-category="bronze" id="tile-ruby-red" data-interiors='["interior-07.jpg"]' data-interior-name="Ruby Red">
           <div class="tile-media">
             <img src="images/ruby-red.jpg" alt="Ruby Red" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Коричневый и золотой</p>
             <h3 class="tile-name">Ruby Red</h3>
             <p class="tile-cn">红宝石</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Ruby Red">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="beige" id="tile-new-pandora">
+        <article class="tile-card" data-category="beige" id="tile-new-pandora" data-interiors='["interior-24.jpg"]' data-interior-name="New Pandora">
           <div class="tile-media">
             <img src="images/new-pandora.jpg" alt="New Pandora" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Бежевый</p>
             <h3 class="tile-name">New Pandora</h3>
             <p class="tile-cn">新潘多拉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="New Pandora">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="bronze" id="tile-rosso-fiamma">
+        <article class="tile-card" data-category="bronze" id="tile-rosso-fiamma" data-interiors='["interior-30.jpg"]' data-interior-name="Rosso di Fiamma">
           <div class="tile-media">
             <img src="images/rosso-fiamma.jpg" alt="Rosso di Fiamma" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Коричневый и золотой</p>
             <h3 class="tile-name">Rosso di Fiamma</h3>
             <p class="tile-cn">古驰红</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Rosso di Fiamma">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="blue" id="tile-galaxy-blue">
+        <article class="tile-card" data-category="blue" id="tile-galaxy-blue" data-interiors='["interior-33.jpg"]' data-interior-name="Galaxy Blue">
           <div class="tile-media">
             <img src="images/galaxy-blue.jpg" alt="Galaxy Blue" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Синий</p>
             <h3 class="tile-name">Galaxy Blue</h3>
             <p class="tile-cn">银河蓝</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Galaxy Blue">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="blue" id="tile-blue-jadeite">
+        <article class="tile-card" data-category="blue" id="tile-blue-jadeite" data-interiors='["interior-37.jpg"]' data-interior-name="Blue Jadeite">
           <div class="tile-media">
             <img src="images/blue-jadeite.jpg" alt="Blue Jadeite" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Синий</p>
             <h3 class="tile-name">Blue Jadeite</h3>
             <p class="tile-cn">蓝翡翠</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Blue Jadeite">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="green" id="tile-monets-garden">
+        <article class="tile-card" data-category="green" id="tile-monets-garden" data-interiors='["interior-38.jpg"]' data-interior-name="Monet's Garden">
           <div class="tile-media">
             <img src="images/monets-garden.jpg" alt="Monet's Garden" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Зелёный</p>
             <h3 class="tile-name">Monet's Garden</h3>
             <p class="tile-cn">莫奈花园</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Monet's Garden">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="green" id="tile-fontainebleau-green">
+        <article class="tile-card" data-category="green" id="tile-fontainebleau-green" data-interiors='["interior-25.jpg"]' data-interior-name="Fontainebleau Amazon Green">
           <div class="tile-media">
             <img src="images/fontainebleau-green.jpg" alt="Fontainebleau Amazon Green" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Зелёный</p>
             <h3 class="tile-name">Fontainebleau Amazon Green</h3>
             <p class="tile-cn">枫丹亚马逊绿</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Fontainebleau Amazon Green">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="pink" id="tile-onice-rose">
+        <article class="tile-card" data-category="pink" id="tile-onice-rose" data-interiors='["interior-23.jpg"]' data-interior-name="Onice Rose">
           <div class="tile-media">
             <img src="images/onice-rose.jpg" alt="Onice Rose" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Розовый</p>
             <h3 class="tile-name">Onice Rose</h3>
             <p class="tile-cn">玫瑰冰玉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Onice Rose">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="white" id="tile-white-sand">
+        <article class="tile-card" data-category="white" id="tile-white-sand" data-interiors='["interior-28.jpg"]' data-interior-name="White Sand">
           <div class="tile-media">
             <img src="images/white-sand.jpg" alt="White Sand" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Белый</p>
             <h3 class="tile-name">White Sand</h3>
             <p class="tile-cn">白金沙</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="White Sand">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="white" id="tile-tal-mahal">
+        <article class="tile-card" data-category="white" id="tile-tal-mahal" data-interiors='["interior-27.jpg"]' data-interior-name="Tal Mahal">
           <div class="tile-media">
             <img src="images/tal-mahal.jpg" alt="Tal Mahal" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Белый</p>
             <h3 class="tile-name">Tal Mahal</h3>
             <p class="tile-cn">镜湖春晓</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Tal Mahal">Заявка</button>
             </div>
           </div>
@@ -840,7 +962,7 @@
             <h3 class="tile-name">Peach & Plum Spring Breeze</h3>
             <p class="tile-cn">桃李春风</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Peach & Plum Spring Breeze">Заявка</button>
             </div>
           </div>
@@ -855,7 +977,7 @@
             <h3 class="tile-name">Dream Cloud Pink</h3>
             <p class="tile-cn">云梦粉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Dream Cloud Pink">Заявка</button>
             </div>
           </div>
@@ -870,67 +992,71 @@
             <h3 class="tile-name">Pandora Pink</h3>
             <p class="tile-cn">潘多拉粉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Pandora Pink">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="bronze" id="tile-pink-roman-jade">
+        <article class="tile-card" data-category="bronze" id="tile-pink-roman-jade" data-interiors='["interior-09.jpg", "interior-36.jpg"]' data-interior-name="Pink Roman Jade">
           <div class="tile-media">
             <img src="images/pink-roman-jade.jpg" alt="Pink Roman Jade" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Коричневый и золотой</p>
             <h3 class="tile-name">Pink Roman Jade</h3>
             <p class="tile-cn">罗马粉玉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Pink Roman Jade">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="grey" id="tile-andes-snowscape">
+        <article class="tile-card" data-category="grey" id="tile-andes-snowscape" data-interiors='["interior-39.jpg"]' data-interior-name="Andes Snowscape">
           <div class="tile-media">
             <img src="images/andes-snowscape.jpg" alt="Andes Snowscape" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Серый</p>
             <h3 class="tile-name">Andes Snowscape</h3>
             <p class="tile-cn">安第斯雪景</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Andes Snowscape">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="white" id="tile-ice-jade">
+        <article class="tile-card" data-category="white" id="tile-ice-jade" data-interiors='["interior-21.jpg"]' data-interior-name="Ice Jade">
           <div class="tile-media">
             <img src="images/ice-jade.jpg" alt="Ice Jade" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Белый</p>
             <h3 class="tile-name">Ice Jade</h3>
             <p class="tile-cn">冰玉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Ice Jade">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="white" id="tile-onice-rose-white">
+        <article class="tile-card" data-category="white" id="tile-onice-rose-white" data-interiors='["interior-35.jpg"]' data-interior-name="Onice Rose White">
           <div class="tile-media">
             <img src="images/onice-rose-white.jpg" alt="Onice Rose White" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Белый</p>
             <h3 class="tile-name">Onice Rose White</h3>
             <p class="tile-cn">玫瑰白冰玉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Onice Rose White">Заявка</button>
             </div>
           </div>
@@ -945,142 +1071,151 @@
             <h3 class="tile-name">Persian Topaz</h3>
             <p class="tile-cn">波斯黄玉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Persian Topaz">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="bronze" id="tile-volcano-agate-red">
+        <article class="tile-card" data-category="bronze" id="tile-volcano-agate-red" data-interiors='["interior-01.jpg", "interior-31.jpg"]' data-interior-name="Volcano Agate Jade Red">
           <div class="tile-media">
             <img src="images/volcano-agate-red.jpg" alt="Volcano Agate Jade Red" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Коричневый и золотой</p>
             <h3 class="tile-name">Volcano Agate Jade Red</h3>
             <p class="tile-cn">红火山玛瑙玉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Volcano Agate Jade Red">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="white" id="tile-petrified-wood">
+        <article class="tile-card" data-category="white" id="tile-petrified-wood" data-interiors='["interior-32.jpg"]' data-interior-name="Petrified Wood">
           <div class="tile-media">
             <img src="images/petrified-wood.jpg" alt="Petrified Wood" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Белый</p>
             <h3 class="tile-name">Petrified Wood</h3>
             <p class="tile-cn">木化石</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Petrified Wood">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="bronze" id="tile-golden-pandora">
+        <article class="tile-card" data-category="bronze" id="tile-golden-pandora" data-interiors='["interior-22.jpg"]' data-interior-name="Golden Pandora">
           <div class="tile-media">
             <img src="images/golden-pandora.jpg" alt="Golden Pandora" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Коричневый и золотой</p>
             <h3 class="tile-name">Golden Pandora</h3>
             <p class="tile-cn">金花潘多拉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Golden Pandora">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="bronze" id="tile-dubai-gold">
+        <article class="tile-card" data-category="bronze" id="tile-dubai-gold" data-interiors='["interior-15.jpg", "interior-29.jpg"]' data-interior-name="Dubai Gold">
           <div class="tile-media">
             <img src="images/dubai-gold.jpg" alt="Dubai Gold" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Коричневый и золотой</p>
             <h3 class="tile-name">Dubai Gold</h3>
             <p class="tile-cn">迪拜金</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Dubai Gold">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="green" id="tile-butterfly-green">
+        <article class="tile-card" data-category="green" id="tile-butterfly-green" data-interiors='["interior-02.jpg"]' data-interior-name="Butterfly Green">
           <div class="tile-media">
             <img src="images/butterfly-green.jpg" alt="Butterfly Green" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Зелёный</p>
             <h3 class="tile-name">Butterfly Green</h3>
             <p class="tile-cn">绿蝴蝶</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Butterfly Green">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="green" id="tile-frosted-jade">
+        <article class="tile-card" data-category="green" id="tile-frosted-jade" data-interiors='["interior-03.jpg"]' data-interior-name="Frosted Jade">
           <div class="tile-media">
             <img src="images/frosted-jade.jpg" alt="Frosted Jade" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Зелёный</p>
             <h3 class="tile-name">Frosted Jade</h3>
             <p class="tile-cn">冷翡翠</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Frosted Jade">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="grey" id="tile-bulgari-grey">
+        <article class="tile-card" data-category="grey" id="tile-bulgari-grey" data-interiors='["interior-05.jpg"]' data-interior-name="Bulgari Grey">
           <div class="tile-media">
             <img src="images/bulgari-grey.jpg" alt="Bulgari Grey" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Серый</p>
             <h3 class="tile-name">Bulgari Grey</h3>
             <p class="tile-cn">宝格丽灰</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Bulgari Grey">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="grey" id="tile-rhine-dawn">
+        <article class="tile-card" data-category="grey" id="tile-rhine-dawn" data-interiors='["interior-06.jpg"]' data-interior-name="Rhine Dawn">
           <div class="tile-media">
             <img src="images/rhine-dawn.jpg" alt="Rhine Dawn" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Серый</p>
             <h3 class="tile-name">Rhine Dawn</h3>
             <p class="tile-cn">莱茵河</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Rhine Dawn">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="grey" id="tile-bvlgari-blue">
+        <article class="tile-card" data-category="grey" id="tile-bvlgari-blue" data-interiors='["interior-04.jpg"]' data-interior-name="Bvlgari Blue">
           <div class="tile-media">
             <img src="images/bvlgari-blue.jpg" alt="Bvlgari Blue" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Серый</p>
             <h3 class="tile-name">Bvlgari Blue</h3>
             <p class="tile-cn">宝格丽蓝</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Bvlgari Blue">Заявка</button>
             </div>
           </div>
@@ -1095,37 +1230,39 @@
             <h3 class="tile-name">Van Gogh Green</h3>
             <p class="tile-cn">梵高绿</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Van Gogh Green">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="beige" id="tile-brescia">
+        <article class="tile-card" data-category="beige" id="tile-brescia" data-interiors='["interior-34.jpg"]' data-interior-name="Brescia">
           <div class="tile-media">
             <img src="images/brescia.jpg" alt="Brescia" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Бежевый</p>
             <h3 class="tile-name">Brescia</h3>
             <p class="tile-cn">布雷西亚</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Brescia">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="green" id="tile-sintered-enigma-green">
+        <article class="tile-card" data-category="green" id="tile-sintered-enigma-green" data-interiors='["interior-12.jpg"]' data-interior-name="Sintered Enigma Green">
           <div class="tile-media">
             <img src="images/sintered-enigma-green.jpg" alt="Sintered Enigma Green" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Зелёный</p>
             <h3 class="tile-name">Sintered Enigma Green</h3>
             <p class="tile-cn">纳秋绿</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Sintered Enigma Green">Заявка</button>
             </div>
           </div>
@@ -1140,97 +1277,103 @@
             <h3 class="tile-name">Patek Emerald</h3>
             <p class="tile-cn">百达翡翠</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Patek Emerald">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="green" id="tile-victoria-green">
+        <article class="tile-card" data-category="green" id="tile-victoria-green" data-interiors='["interior-19.jpg"]' data-interior-name="Victoria Green">
           <div class="tile-media">
             <img src="images/victoria-green.jpg" alt="Victoria Green" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Зелёный</p>
             <h3 class="tile-name">Victoria Green</h3>
             <p class="tile-cn">维多利亚绿</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Victoria Green">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="green" id="tile-top-amazon-green">
+        <article class="tile-card" data-category="green" id="tile-top-amazon-green" data-interiors='["interior-16.jpg", "interior-20.jpg"]' data-interior-name="Top Amazon Green">
           <div class="tile-media">
             <img src="images/top-amazon-green.jpg" alt="Top Amazon Green" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Зелёный</p>
             <h3 class="tile-name">Top Amazon Green</h3>
             <p class="tile-cn">顶级亚马逊绿</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Top Amazon Green">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="white" id="tile-fendi-white">
+        <article class="tile-card" data-category="white" id="tile-fendi-white" data-interiors='["interior-17.jpg"]' data-interior-name="Fendi White">
           <div class="tile-media">
             <img src="images/fendi-white.jpg" alt="Fendi White" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Белый</p>
             <h3 class="tile-name">Fendi White</h3>
             <p class="tile-cn">芬迪白</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Fendi White">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="bronze" id="tile-baikal-red-jade">
+        <article class="tile-card" data-category="bronze" id="tile-baikal-red-jade" data-interiors='["interior-18.jpg"]' data-interior-name="Baikal Red Jade">
           <div class="tile-media">
             <img src="images/baikal-red-jade.jpg" alt="Baikal Red Jade" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Коричневый и золотой</p>
             <h3 class="tile-name">Baikal Red Jade</h3>
             <p class="tile-cn">贝加尔红玉</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Baikal Red Jade">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="white" id="tile-calacatta-gold">
+        <article class="tile-card" data-category="white" id="tile-calacatta-gold" data-interiors='["interior-08.jpg"]' data-interior-name="Calacatta Gold">
           <div class="tile-media">
             <img src="images/calacatta-gold.jpg" alt="Calacatta Gold" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Белый</p>
             <h3 class="tile-name">Calacatta Gold</h3>
             <p class="tile-cn">超级鱼肚金</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Calacatta Gold">Заявка</button>
             </div>
           </div>
         </article>
-        <article class="tile-card" data-category="pink" id="tile-pink-sand">
+        <article class="tile-card" data-category="pink" id="tile-pink-sand" data-interiors='["interior-10.jpg"]' data-interior-name="Pink Sand">
           <div class="tile-media">
             <img src="images/pink-sand.jpg" alt="Pink Sand" loading="lazy">
             <div class="tile-media-fade"></div>
+            <button class="tile-interior-badge" data-interior-trigger="1" aria-label="Смотреть в интерьере"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>В интерьере</span></button>
           </div>
           <div class="tile-info">
             <p class="tile-eyebrow">Розовый</p>
             <h3 class="tile-name">Pink Sand</h3>
             <p class="tile-cn">粉金沙</p>
             <div class="tile-footer">
-              <p class="tile-price">от <strong>9&nbsp;000&nbsp;₽</strong> / м²</p>
+              <p class="tile-price">от <strong>10&nbsp;000&nbsp;₽</strong> / м²</p>
               <button class="tile-cta" data-tile="Pink Sand">Заявка</button>
             </div>
           </div>
@@ -1446,6 +1589,21 @@
   </div>
 </div>
 
+<div class="ilb-overlay" id="ilb-overlay">
+  <div class="ilb">
+    <button class="ilb-close" id="ilb-close">&times;</button>
+    <div class="ilb-frame">
+      <button class="ilb-nav ilb-prev" id="ilb-prev">&#8249;</button>
+      <img id="ilb-img" src="" alt="">
+      <button class="ilb-nav ilb-next" id="ilb-next">&#8250;</button>
+    </div>
+    <div class="ilb-caption">
+      <h4 id="ilb-name"></h4>
+      <p id="ilb-count"></p>
+    </div>
+  </div>
+</div>
+
 <script>
   // ---- Filters ----
   const chips = document.querySelectorAll('.filter-chip');
@@ -1489,6 +1647,54 @@
   });
   modalClose.addEventListener('click', () => overlay.classList.remove('open'));
   overlay.addEventListener('click', (e) => { if(e.target === overlay) overlay.classList.remove('open'); });
+
+  // ---- Interior lightbox ----
+  const ilbOverlay = document.getElementById('ilb-overlay');
+  const ilbImg = document.getElementById('ilb-img');
+  const ilbName = document.getElementById('ilb-name');
+  const ilbCount = document.getElementById('ilb-count');
+  const ilbPrev = document.getElementById('ilb-prev');
+  const ilbNext = document.getElementById('ilb-next');
+  const ilbClose = document.getElementById('ilb-close');
+  let ilbImages = [];
+  let ilbIndex = 0;
+  let ilbSlabName = '';
+
+  function ilbRender(){
+    ilbImg.src = 'gallery/' + ilbImages[ilbIndex];
+    ilbImg.alt = ilbSlabName + ' в интерьере';
+    ilbName.textContent = ilbSlabName + ' в интерьере';
+    ilbCount.textContent = ilbImages.length > 1 ? (ilbIndex + 1) + ' / ' + ilbImages.length : '';
+    const multi = ilbImages.length > 1;
+    ilbPrev.classList.toggle('hidden', !multi);
+    ilbNext.classList.toggle('hidden', !multi);
+  }
+
+  document.querySelectorAll('[data-interior-trigger]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.tile-card');
+      try{
+        ilbImages = JSON.parse(card.dataset.interiors.replace(/'/g, '"'));
+      }catch(err){
+        ilbImages = card.dataset.interiors.replace(/[\[\]"']/g,'').split(',').map(s=>s.trim());
+      }
+      ilbSlabName = card.dataset.interiorName || '';
+      ilbIndex = 0;
+      ilbRender();
+      ilbOverlay.classList.add('open');
+    });
+  });
+  ilbPrev.addEventListener('click', () => { ilbIndex = (ilbIndex - 1 + ilbImages.length) % ilbImages.length; ilbRender(); });
+  ilbNext.addEventListener('click', () => { ilbIndex = (ilbIndex + 1) % ilbImages.length; ilbRender(); });
+  ilbClose.addEventListener('click', () => ilbOverlay.classList.remove('open'));
+  ilbOverlay.addEventListener('click', (e) => { if(e.target === ilbOverlay) ilbOverlay.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => {
+    if(!ilbOverlay.classList.contains('open')) return;
+    if(e.key === 'Escape') ilbOverlay.classList.remove('open');
+    if(e.key === 'ArrowLeft') ilbPrev.click();
+    if(e.key === 'ArrowRight') ilbNext.click();
+  });
 
   document.getElementById('modal-form').addEventListener('submit', (e) => {
     e.preventDefault();
